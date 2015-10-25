@@ -1,0 +1,21 @@
+Code book.  
+The purpose of this document is to address the following question in Course assignment: 
+Was code book submitted to GitHub that modifies and updates the codebooks available to you with the data to indicate all the variables and summaries you calculated, along with units, and any other relevant information?
+It contains substantially the same information as Readme file, but is presented on a higher level in a narrative format. 
+The data set provided for assignment contained results of data collected from accelerometers from Samsung smart phone.  30 individuals participated in the experiment, and the following six types were activities were measured: walking, walking upstairs, walking downstairs, sitting, standing, and laying.  
+The data set was divided into two categories, training and test sets, which contained the same information for different subject participants (individuals).  
+Initial preparation of data:
+1.	Data was saved in a C:\Users\shapiro\Documents\R\Course Project 
+2.	Files were loaded into R, via Import Dataset function in RStudio.  
+3.	Reviewed each file via using dim() function, to determine the number of columns and rows, in order to understand which files can be merged together.  Additionally, used head() and tail() functions to understand files’ appearance.  
+Manipulations:
+4.	Based on the analysis above, performed the rbinds of Xtest/Xtrain and ytest/ytrain. 
+5.	In the next step, gave column names to the merged xtest/xtrain file.  The names were taken from features.txt file, which contained the names of all tests.  This resulted in a file that had test results listed for entire test/train population, and had each test column named.  
+6.	Using Cbind, combined the files from steps 4 and 5 above, resulting in a file with 563 columns and 10,299 rows.  Columns 1-561 represent various tests, column 562 represents types of activity (by number), and 563 represents specific number of subject (individual) participating in activity.  
+7.	Renamed the columns 562 and 563 to “activity_type” and “subject_number”, so that it is clearer what the columns represent.  
+8.	Used plyr::mapvalues to create a new column that had verbal explanations for each of activity numbers 1:6.  I then added that row to table with a cbind, for the total of 564 rows.  
+Tidyset:
+9.	 To create a tidy set, I used a grep function, to only keep the columns that contained character strings “mean” or “std”.  My reasoning was that these two abbreviations would have to be present in names of any measurements of mean or standard deviation.  Confirmed my hypothesis using head() and tail() functions.  Arrived at a tidy set of 79 columns and 10,299 rows.  
+10.	Used group_by() and summarise_each functions to arrive at tidy set, which grouped and summarized data by “activity_number” and “subject_number”.  
+11.	Created tidyset.txt via write.table() function, and uploaded result to Coursera.  
+
